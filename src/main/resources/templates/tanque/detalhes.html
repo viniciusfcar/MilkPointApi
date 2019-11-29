@@ -2,14 +2,14 @@
 <html layout:decorate="~{layout}">
 <head>
 <meta charset="UTF-8" />
-<title>Detalhes do Filme</title>
+<title>Detalhes dos Tanques</title>
 
 </head>
 <body>
 		<div class="content-wrapper" layout:fragment="corpo">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<strong>Detalhes do Filme</strong>
+					<strong>Detalhes do Tanque</strong>
 				</div>
 				
 				<div class="form-group row">
@@ -17,35 +17,29 @@
 							<hr class="sidebar-divider my-1">
 							<div class="row">
 							
-							<div class="form-group col-md-3">							 
-								<div>
-									<img height="320px" width="210px" th:src="@{/filme/imagem/{id}(id=${filme.id})}"/>
-								</div>							
-							</div>
-							
-							<div class="form-group col-md-3">
+														
+							<div class="form-group col-md-8">
 								<div th:field="*{filme}" ></div>
-								<label><b>Titulo:</b></label> <div th:text="${filme.titulo}" ></div>
+								<label><b>Nome:</b></label> <div th:text="${tanque.nome}" ></div>
 								<hr class="sidebar-divider my-0">
-								<label><b>País de Origem:</b></label> <div th:text="${filme.pais}" ></div>
+								<label><b>Capacidade:</b></label> <div th:text="${tanque.capacidade}" ></div>
 								<hr class="sidebar-divider my-0">
-								<label><b>Sinopse:</b></label> <div th:text="${filme.sinopse}" ></div>	
+								<label><b>Qtd. Atual:</b></label> <div th:text="${tanque.qtdAtual}" ></div>	
 								<hr class="sidebar-divider my-0">	
-								<label><b>Preço:</b></label> <div th:text="${filme.preco}" ></div>																			
+								<label><b>Qtd. Restante:</b></label> <div th:text="${tanque.qtdRestante}" ></div>																			
 				
 							</div>
-								<div class="form-group col-md-4">
-									<label><b>Ano de Lançamento:</b></label> <div th:text="${filme.ano}" ></div>			
+								<div class="form-group col-md-3">
+									<label><b>Localização:</b></label> <div th:text="${tanque.localizacao}" ></div>			
 									<hr class="sidebar-divider my-0">						
-									<label><b>Produtora:</b></label><div th:text="${filme.produtora.nome}" ></div>
+									<label><b>Data de Criação:</b></label><div th:text="${tanque.dataCriacao}" ></div>
 									<hr class="sidebar-divider my-0">
-									<label><b>Gênero:</b></label><div th:text="${filme.genero.nome}" ></div>
+									<label><b>Descrição:</b></label><div th:text="${tanque.descricao}" ></div>
 									<hr class="sidebar-divider my-0">
-									<label><b>Diretor:</b></label>
-									<div th:each="diretor : ${filme.diretor}" >
-										<div th:text= "${diretor.nome}" ></div>								
+									<label><b>Responsável:</b></label>
+									<div th:each="responsavel : ${tanque.responsavel}" >
+										<div th:text= "${responsavel.nome}" ></div>								
 									</div>
-							
 							</div>
 							</div>
 								
@@ -56,7 +50,7 @@
 				</div>
 				
 				<div class="form-group row">
-					<a class="btn btn-sm btn-info" th:href="@{/filme/listar}" >Voltar</a>
+					<a class="btn btn-sm btn-info" th:href="@{/tanque/listar}" >Voltar</a>
 				</div>
 
 			
