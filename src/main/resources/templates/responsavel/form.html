@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+<title>Cadastro do Responsável</title>
+
+</head>
+<body>
+		<div class="content-wrapper" layout:fragment="corpo">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<strong>Cadastro do Responsável</strong>
+				</div>
+			<form enctype= "multipart/form-data"  class="container" method="post" th:object="${responsavel}"
+				th:action="@{/responsavel/save}">
+
+				<!--Input responsável em guardar o id-->
+				<input id="id" name="id" type="hidden" th:field="*{id}" th:value="*{id}">
+
+				<!-- div reponsável em mostrar os erros -->
+				<div class="form-group row">
+					<div class="alert alert-danger alert-dismissible fade show"
+						role="alert" th:if="${#fields.hasAnyErrors()}">
+
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+
+						<div th:each="detailedError : ${#fields.detailedErrors()}">
+							<strong th:text="${detailedError.message}"> </strong>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group row">                                                          
+					<div class="col-md-4" th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
+					    <label>Nome</label>
+					    <input type="text" class="form-control input-sm" th:field="*{nome}" autofocus="autofocus" placeholder="Informe o nome" maxlength="150"/>
+					</div>
+				</div>
+				
+				<div class="form-group row">                                                          
+					<div class="col-md-4" th:classappend="${#fields.hasErrors('apelido')}? 'has-error'">
+					    <label>Apelido</label>
+					    <input type="text" class="form-control input-sm" th:field="*{apelido}" autofocus="autofocus" placeholder="Informe o apelido" maxlength="100"/>
+					</div>
+				</div>
+				
+				<div class="form-group row">                                                          
+					<div class="col-md-4" th:classappend="${#fields.hasErrors('cpf')}? 'has-error'">
+					    <label>CPF</label>
+					    <input type="text" class="form-control input-sm" th:field="*{cpf}" autofocus="autofocus" placeholder="Informe o cpf" maxlength="150"/>
+					</div>
+				</div>
+				
+	            <div class="form-group row">                                                          
+					<div class="col-md-4" th:classappend="${#fields.hasErrors('descricao')}? 'has-error'">
+					    <label for="textarea">Descrição</label>
+					    <textarea type="text" class="form-control input-sm" th:field="*{descricao}" autofocus="autofocus" rows="5" maxlength="3000"></textarea>
+					</div>
+				</div>
+				
+				<div class="form-group row">
+					<button type="submit" class="btn btn-m btn-primary">Cadastrar</button>
+					<a th:href="@{/responsavel/listar}" style="margin-left: 5px" class="btn btn-m btn-danger">Cancelar</a>
+				</div>
+
+			</form>
+
+		</div>
+		</div>
+		
+</body>
+</html>

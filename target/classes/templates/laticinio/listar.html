@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+<title>Listagem dos Lacticínios</title>
+</head>
+<body>
+
+		<div class="content-wrapper" layout:fragment="corpo">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+			<strong>Lacticínios</strong>
+				</div>
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="table table-sm table-striped table-hover table-bordered">
+							<thead>
+								<tr class="text-center">
+									<th>ID</th>
+									<th>Nome</th>
+									<th>Apelido</th>
+									<th>CNPJ</th>
+									<th>Descrição</th>
+									<th>Ações</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="text-center" th:each="laticinio : ${laticinios}">
+									<td th:text="${laticinio.id}"></td>
+									<td th:text="${laticinio.nome}"></td>
+									<td th:text="${laticinio.apelido}"></td>
+									<td th:text="${laticinio.cnpj}"></td>
+									<td>
+		                            	<button type="button" class="btn btn-secondary btn-sm" data-container="body"
+		                                    data-toggle="popover" data-placement="top" th:attr="data-content=${#strings.concat(
+			                                    laticinio.descricao, ', ',
+		                                    )}">		                                
+		                                	<i class="fa fa-eye" aria-hidden="true"></i>
+		                            	</button>
+		                        	</td>
+									<td>
+										<div class="btn-group pull-right">
+									   		<a class="btn btn-sm btn-primary" th:href="@{/laticinio/edit/{id}(id=${laticinio.id})}" >Editar</a>
+									   		<a class="delete btn btn-sm btn-danger" style="margin-left: 5px" th:href="@{/laticinio/delete/{id}(id=${laticinio.id})}">Excluir</a>
+									   </div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="panel-footer">
+					<a class="btn btn-sm btn-success" th:href="@{/laticinio/add}" >Adicionar Novo</a>
+				</div>
+
+			</div>
+		</div>
+	
+</body>
+</html>

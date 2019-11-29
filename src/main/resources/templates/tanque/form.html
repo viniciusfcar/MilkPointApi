@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+<title>Cadastro de Tanque</title>
+
+</head>
+<body>
+		<div class="content-wrapper" layout:fragment="corpo">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<strong>Cadastro de Tanques</strong>
+				</div>
+			<form enctype= "multipart/form-data" class="container" method="post" th:object="${tanque}"
+				th:action="@{/tanque/save}">
+
+				<!--Input responsável em guardar o id-->
+				<input id="id" name="id" type="hidden" th:field="*{id}"	th:value="*{id}">
+
+				<!-- div reponsável em mostrar os erros -->
+				<div class="form-group row">
+					<div class="alert alert-danger alert-dismissible fade show"
+						role="alert" th:if="${#fields.hasAnyErrors()}">
+
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+
+						<div th:each="detailedError : ${#fields.detailedErrors()}">
+							<strong th:text="${detailedError.message}"> </strong>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group row">                                                          
+					<div class="col-md-4" th:classappend="${#fields.hasErrors('nome')}? 'has-error'">
+					    <label>Nome do Tanque</label>
+					    <input type="text" class="form-control input-sm" th:field="*{nome}" autofocus="autofocus"  maxlength="150"/>
+					</div>
+				</div>
+				
+				<div class="form-group row">                                                          
+					<div class="col-md-4" th:classappend="${#fields.hasErrors('capacidade')}? 'has-error'">
+					    <label>Capacidade</label>
+					    <input type="number" class="form-control input-sm" th:field="*{capacidade}" autofocus="autofocus"  maxlength="150"/>
+					</div>
+				</div>
+				
+				<div class="form-group row">                                                          
+					<div class="col-md-4" th:classappend="${#fields.hasErrors('qtdAtual')}? 'has-error'">
+					    <label>Quantidade Atual</label>
+					    <input type="number" class="form-control input-sm" th:field="*{qtdAtual}" autofocus="autofocus"  maxlength="150"/>
+					</div>
+				</div>
+				
+				<div class="form-group row">                                                          
+					<div class="col-md-4" th:classappend="${#fields.hasErrors('localizacao')}? 'has-error'">
+					    <label>Localização</label>
+					    <input type="text" class="form-control input-sm" th:field="*{localizacao}" autofocus="autofocus"  maxlength="150"/>
+					</div>
+				</div>
+				
+				<div class="form-group row col-md-4">
+					<select th:field="*{responsavel}" class="form-control">
+						<option selected value="-1">Selecione um Responsável</option>
+						<option th:each="responsavel : ${responsaveis}"
+							th:value="${responsavel.id}" th:text="${responsavel.nome}"></option>
+					</select>
+				</div>
+				
+				<div class="form-group row col-md-4">
+	                        <label for="dataNascimento">Data de Criação</label>
+	                        <input type="date" class="form-control" id="dataCriacao" th:field="*{dataCriacao}"
+	                        	   th:classappend="${#fields.hasErrors('dataCriacao')} ? 'is-invalid'" />
+	                        <div class="invalid-feedback">
+								<span th:errors="*{dataCriacao}"></span>
+	                        </div>
+	            </div>
+				
+				<div class="form-group row">                                                          
+					<div class="col-md-4" th:classappend="${#fields.hasErrors('descricao')}? 'has-error'">
+					    <label for="textarea">Descrição</label>
+					    <textarea type="text" class="form-control input-sm" th:field="*{descricao}" autofocus="autofocus"  rows="7" maxlength="3000"></textarea>
+					</div>
+				</div>
+				
+				
+				<div class="form-group row">
+					<button type="submit" class="btn btn-m btn-primary">Cadastrar</button>
+					<a th:href="@{/tanque/listar}" style="margin-left: 5px" class="btn btn-m btn-danger">Cancelar</a>
+				</div>
+
+			</form>
+			</div>
+		</div>
+		
+	</body>
+</html>
