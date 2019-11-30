@@ -57,15 +57,15 @@ public class AbastecimentoService {
     }
     
 	public Abastecimento deposito(Abastecimento deposito) {
-		if(deposito.getQauntidade()<0) {
-			deposito.setQauntidade(deposito.getQauntidade()*-1);
+		if(deposito.getQuantidade()<0) {
+			deposito.setQuantidade(deposito.getQuantidade()*-1);
 		}
 		return repository.saveAndFlush(deposito);
 	}
 	
 	public Abastecimento retirada(Abastecimento retirada) {
-		if(retirada.getQauntidade()>0) {
-			retirada.setQauntidade(retirada.getQauntidade()*-1);
+		if(retirada.getQuantidade()>0) {
+			retirada.setQuantidade(retirada.getQuantidade()*-1);
 		}
 		return repository.saveAndFlush(retirada);
 	}
@@ -73,7 +73,7 @@ public class AbastecimentoService {
 	private void log (Log.Tipo tipo, Abastecimento abastecimento) {
 		Log log = new Log(tipo, abastecimento.getResponsavel(), abastecimento.getTanque(), 
 				abastecimento, abastecimento.getProdutor(), abastecimento.getLaticinio(), 
-				abastecimento.getQauntidade(), abastecimento.getStatus(), new Date(), ""+abastecimento.getTipo());
+				abastecimento.getQuantidade(), abastecimento.getStatus(), new Date(), ""+abastecimento.getTipo());
 		logger.saveAndFlush(log);
 	}
 

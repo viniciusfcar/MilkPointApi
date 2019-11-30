@@ -22,16 +22,16 @@ import net.milkpoint.service.ResponsavelService;
 public class AbastecimentoResource {
 
 	@Autowired
-	private AbastecimentoService service;
+	private AbastecimentoService abastecimentoService;
 
 	public Abastecimento add(Abastecimento Abastecimento) {
-		return service.save(Abastecimento);
+		return abastecimentoService.save(Abastecimento);
 	}
 
 	@PostMapping("/deposito")
 	public Abastecimento deposito(@RequestBody Abastecimento abastecimento) {
-		if (abastecimento.getQauntidade() < 0) {
-			abastecimento.setQauntidade(abastecimento.getQauntidade() * -1);
+		if (abastecimento.getQuantidade() < 0) {
+			abastecimento.setQuantidade(abastecimento.getQuantidade() * -1);
 		}
 		abastecimento.setTipo(Abastecimento.Tipo.DEPOSITO);
 		return add(abastecimento);
@@ -39,8 +39,8 @@ public class AbastecimentoResource {
 
 	@PostMapping("/retirada")
 	public Abastecimento retirada(@RequestBody Abastecimento abastecimento) {
-		if (abastecimento.getQauntidade() > 0) {
-			abastecimento.setQauntidade(abastecimento.getQauntidade() * -1);
+		if (abastecimento.getQuantidade() > 0) {
+			abastecimento.setQuantidade(abastecimento.getQuantidade() * -1);
 		}
 		abastecimento.setTipo(Abastecimento.Tipo.RETIRADA);
 		return add(abastecimento);
@@ -48,12 +48,12 @@ public class AbastecimentoResource {
 
 	@GetMapping("/consulta")
 	public List<Abastecimento> listar() {
-		return service.findAll();
+		return abastecimentoService.findAll();
 	}
 
 	@GetMapping("/consulta/{id}")
 	public ResponseEntity<Abastecimento> buscar(@PathVariable Long id) {
-		Abastecimento Abastecimento = service.findOne(id);
+		Abastecimento Abastecimento = abastecimentoService.findOne(id);
 		if (Abastecimento == null) {
 			return ResponseEntity.notFound().build();
 		}
@@ -62,27 +62,27 @@ public class AbastecimentoResource {
 
 	@PostMapping("/confirma/{id}")
 	public ResponseEntity<Abastecimento> confirmar(@PathVariable Long abastecimentoId, Long responsavelId) {
-		Abastecimento abastecimento = service.findOne(abastecimentoId);
+		Abastecimento abastecimento = abastecimentoService.findOne(abastecimentoId);
 		Responsavel responsavel = new ResponsavelService().findOne(responsavelId);
 		if (abastecimento == null || responsavel == null || abastecimento.getStatus() != Status.PENDENTE) {
 			return ResponseEntity.notFound().build();
 		}
 		abastecimento.setStatus(Status.CONFIRMADO);
 		abastecimento.setResponsavel(responsavel);
-		service.save(abastecimento);
+		abastecimentoService.save(abastecimento);
 		return ResponseEntity.ok(abastecimento);
 	}
 
 	@PostMapping("/cancela/{id}")
 	public ResponseEntity<Abastecimento> cancelar(@PathVariable Long abastecimentoId, Long responsavelId) {
-		Abastecimento abastecimento = service.findOne(abastecimentoId);
+		Abastecimento abastecimento = abastecimentoService.findOne(abastecimentoId);
 		Responsavel responsavel = new ResponsavelService().findOne(responsavelId);
 		if (abastecimento == null || responsavel == null || abastecimento.getStatus() != Status.PENDENTE) {
 			return ResponseEntity.notFound().build();
 		}
 		abastecimento.setStatus(Status.CANCELADO);
 		abastecimento.setResponsavel(responsavel);
-		service.save(abastecimento);
+		abastecimentoService.save(abastecimento);
 		return ResponseEntity.ok(abastecimento);
 	}
 }

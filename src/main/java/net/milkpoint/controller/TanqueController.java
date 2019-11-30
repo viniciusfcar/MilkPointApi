@@ -42,6 +42,7 @@ public class TanqueController {
 			throws IOException {
 
 		if (result.hasErrors()) {
+			tanque.setQtdRestante(tanque.getCapacidade()-tanque.getQtdAtual());
 			return add(tanque);
 		}
 

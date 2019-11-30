@@ -95,14 +95,14 @@ public class Abastecimento implements Serializable{
 		this.data = data;
 	}
 
-	public Long getQauntidade() {
+	public Long getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQauntidade(Long quantidade) {
+	public void setQuantidade(Long quantidade) {
 		this.quantidade = quantidade;
 	}
-	
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
