@@ -38,14 +38,12 @@ public class TanqueController {
 	}
 
 	@PostMapping("/save")
-	public ModelAndView save(@Valid Tanque tanque, BindingResult result)
-			throws IOException {
+	public ModelAndView save(@Valid Tanque tanque, BindingResult result) throws IOException {
 
 		if (result.hasErrors()) {
-			tanque.setQtdRestante(tanque.getCapacidade()-tanque.getQtdAtual());
 			return add(tanque);
 		}
-
+		tanque.setQtdRestante(tanque.getCapacidade() - tanque.getQtdAtual());
 		tanqueService.save(tanque);
 
 		return findAll();
