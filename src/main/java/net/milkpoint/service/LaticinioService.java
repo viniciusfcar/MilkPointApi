@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.milkpoint.model.Laticinio;
+import net.milkpoint.model.Produtor;
 import net.milkpoint.repository.LaticinioRepository;
 
 @Service
@@ -28,6 +29,10 @@ public class LaticinioService {
      
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+    
+    public Laticinio buscaLogin(String email) {
+    	return repository.findByEmailIgnoreCaseContaining(email);
     }
 
 }

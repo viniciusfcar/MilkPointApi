@@ -11,10 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Produtor implements Serializable {
-
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -33,6 +36,15 @@ public class Produtor implements Serializable {
 
 	@Column(length = 18)
 	private String cpf;
+	
+	@Column
+	private String email;
+	
+	@Column
+    private String password;
+	
+	@Column
+	private Perfil perfil;
 
 	@OneToMany
 	@JoinTable(name = "abastecimento")
@@ -82,6 +94,38 @@ public class Produtor implements Serializable {
 		return apelido;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public boolean verificaPassword(String senha) {
+		if(password == senha) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
+
 	public void setApelido(String apelido) {
 		this.apelido = apelido;
 	}
@@ -89,5 +133,7 @@ public class Produtor implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
+	
 
 }

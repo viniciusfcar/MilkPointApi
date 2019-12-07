@@ -37,6 +37,12 @@ public class Responsavel implements Serializable {
 
 	@Column(length = 18)
 	private String cpf;
+	
+	@Column
+	private String email;
+	
+	@Column
+    private String password;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "responsavel")
@@ -45,6 +51,9 @@ public class Responsavel implements Serializable {
 	@OneToMany
 	@JoinTable(name = "abastecimento")
 	private List<Abastecimento> abastecimentos;
+	
+	@Column
+	private Perfil perfil;
 
 	public Long getId() {
 		return id;
@@ -96,6 +105,30 @@ public class Responsavel implements Serializable {
 
 	public List<Tanque> getTanque() {
 		return tanque;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
 	}
 
 	public void setTanque(List<Tanque> tanque) {

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.milkpoint.model.Produtor;
 import net.milkpoint.model.Responsavel;
 import net.milkpoint.repository.ResponsavelRepository;
 
@@ -28,6 +29,10 @@ public class ResponsavelService {
      
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+    
+    public Responsavel buscaLogin(String email) {
+    	return repository.findByEmailIgnoreCaseContaining(email);
     }
 
 }

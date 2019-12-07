@@ -39,10 +39,19 @@ public class Laticinio implements Serializable {
 
 	@Column(length = 18)
 	private String cnpj;
+	
+	@Column
+	private String email;
+	
+	@Column
+    private String password;
 
 	@OneToMany
 	@JoinTable(name = "abastecimento")
 	private List<Abastecimento> abastecimentos;
+	
+	@Column
+	private Perfil perfil;
 
 	public Long getId() {
 		return id;
@@ -94,6 +103,30 @@ public class Laticinio implements Serializable {
 
 	public List<Abastecimento> getAbastecimentos() {
 		return abastecimentos;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
 	}
 
 	public void setAbastecimentos(List<Abastecimento> abastecimentos) {

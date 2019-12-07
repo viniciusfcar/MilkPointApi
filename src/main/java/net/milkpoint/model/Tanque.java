@@ -50,7 +50,6 @@ public class Tanque implements Serializable {
 	private Long capacidade;
 
 	@ManyToOne
-	@JoinTable(name="tanque_responsavel")
 	public Responsavel responsavel;
 
 	@Column
