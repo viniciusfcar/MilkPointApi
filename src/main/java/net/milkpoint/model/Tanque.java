@@ -120,7 +120,6 @@ public class Tanque implements Serializable {
 	}
 
 	public void setQtdRestante(Long qtdRestante) {
-		//qtdRestante = (getCapacidade() - getQtdAtual());
 		this.qtdRestante = qtdRestante;
 	}
 
